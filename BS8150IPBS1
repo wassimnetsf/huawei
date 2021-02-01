@@ -1,0 +1,384 @@
+# Huawei Versatile Routing Platform Software
+# VRP (R) software, Version 5.170 (ATN 910I DC V200R006C20SPC600)
+# Copyright (C) 2015-2018 Huawei Technologies Co., Ltd.
+# ATN 910I DC version information:
+# 
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# CXP version information:
+# 
+#          StartupTime   2018/08/06   22:06:03 
+#   SDRAM Memory Size   : 512M bytes
+#   FLASH Memory Size   : 128M bytes
+#   CFCARD Memory Size : 111M bytes 
+#   CXP version information
+#   PCB         Version : 910I DC REV B
+#   FPGA1       Version : V220
+#   CPLD1       Version : V130
+#   PE          Version : 000
+#   BootROM     Version : 8.40.05
+#   BootLoad    Version : 9.72.05
+#   Software    Version : Version 5.170 RELEASE 0001
+# ATN 910I DC's Device status:
+# Slot #    Type       Online    Register      Status      Primary    
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# 2         CXP        Present   NA            Normal      Master     
+# 5         PWR        Present   Registered    Normal      NA         
+# 6         FAN        Present   Registered    Normal      NA         
+#
+sysname BS8150IPBS1
+#
+vlan batch 71 to 76 78 3044 3092 3150 3166 3172 3182 3223
+#
+undo telnet server enable
+#
+radius enable 
+#
+undo dcn
+#
+energy conservation disable
+#
+over-temperature protection enable
+#
+lldp enable
+#
+ip vpn-instance __LOCAL_OAM_VPN__
+ ipv4-family
+#
+vlan 71
+ name 3G_UP_UPC
+vlan 72
+ name 3G_MP_UPC
+vlan 73
+ name 2G_UP_UPC
+vlan 74
+ name 2G_MP_UPC
+vlan 75
+ name 4G_UP_UPC
+vlan 76
+ name 4G_MP_UPC
+vlan 78
+ name ATN_OM_UPC
+vlan 3044
+ name 4G_MP
+vlan 3092
+ name 3G_MP
+vlan 3150
+ name 3G_UP
+vlan 3166
+ name 2G_UP
+vlan 3172
+ name ATN_OM
+vlan 3182
+ name 4G_UP
+vlan 3223
+ name 2G_MP
+#
+hwtacacs-server template ipbb
+ hwtacacs-server authentication 172.19.198.219
+ hwtacacs-server authentication 172.19.198.192 secondary
+ hwtacacs-server authorization 172.19.198.219
+ hwtacacs-server authorization 172.19.198.192 secondary
+ hwtacacs-server accounting 172.19.198.219
+ hwtacacs-server accounting 172.19.198.192 secondary
+ hwtacacs-server source-ip 10.78.1.72
+ hwtacacs-server shared-key cipher %^%#oW4v;g8su0o'7/:IX&tI#g$xU>RxR3x@URQ/&JTR%^%#
+ hwtacacs-server timer response-timeout 30
+ hwtacacs-server user-name original
+#
+rsa peer-public-key 172.19.198.71
+ public-key-code begin
+  30820109
+    02820100
+      C8E8FE0D 78DE3EEF E8580B64 CDD9B030 E9172CCE 966C478D 7922ECDD 799F2EDB
+      DAF144F9 148E5750 6DB0BE0C E59009EE B2825E58 41FFF1A3 460A71D1 4C094D43
+      10C40E4F 301D7E4E 2A16D5EB 9B379A32 183AD026 51C098CF BBC5C7DE C8C3C65F
+      0A1CC999 66491398 F29936B3 C920B6C0 5B5CE91D F57BF074 2CEECDDD 208DCD47
+      27B49A2D B783DB23 600E0CF4 629616E3 50604327 F16E9E3A 6077E58A 4CF6D10D
+      7BAB8419 90280454 0089F471 19518760 C0FB614F E71FFD85 7DBB1001 3E531559
+      7203F3CF 6C39EA19 D6F126C8 660D624F BF57D6A5 D4F45E6E EED47F83 E1921A20
+      42B54C7E 6A6C1B0D 0B3306CF 290C6B8A E2176317 AD30DC37 43C71276 7D5801C9
+    0203
+      010001
+ public-key-code end
+peer-public-key end
+#
+rsa peer-public-key 172.19.198.216
+ public-key-code begin
+  30820109
+    02820100
+      C4E1E1DA CE3F3B67 D2DB39A1 A7869940 28A80ABD FD5BC89E 0AA032F1 F2AF0E8F
+      DF300D5C 31334355 765A819F 4C27B313 FE64903B A650FE4C A0C5E7F5 EA3C0F31
+      4F7BCC0E FBFD60D8 6DB752B1 0A5BED6B 5AA28F5E 2754FAD6 ABBEE64A 157D9236
+      70D61F57 3304C249 FEA672C0 9765897E 71237D51 E9759415 7C043F6F F74796BD
+      94FB7C43 00DD1B30 678985AD F485F66A ED0E16E4 90DAAEBE 79B9B302 964DBBBD
+      21D17BFD A8C9DCB9 CF6524CA A2326065 77CF08FB BEB0B366 C8EFED17 0B53319B
+      4D6EB0C3 B3617445 4DF0E5C4 17927707 A400C2D8 7AFDA6B5 398D7CFB 4D150E62
+      9EFAC6E7 F863F40A 5DAF265F EBABD7E8 E194C63C 0E94A6BD 5FE3C260 D9357AA7
+    0203
+      010001
+ public-key-code end
+peer-public-key end
+#
+ecc peer-public-key 172.19.198.216 encoding-type der
+ public-key-code begin
+    042315AA F0778085 BC91095C 32DBA37E ADEC98FD 49E8FDA8 D3B2FEB8 979D7556
+    37B38853 586A0DDA 0DBF0E4D 3E7027AE CA2526CB 16B28DD5 A100087E 88C1B979
+    D9
+ public-key-code end
+peer-public-key end
+#
+ecc peer-public-key 10.8.196.193 encoding-type der
+ public-key-code begin
+    04C55198 EFFD6E18 3B30586F 23A9CB9E 7A341CC1 EC290DEE F5FF2CAE 89D3BF6D
+    D66D707D 43544533 1FDCA92A A23218E6 734F7519 F2714C7E 084B4C86 AF94408A
+    86
+ public-key-code end
+peer-public-key end
+#
+acl number 2100
+ description ssh
+ rule 5 permit source 10.9.9.253 0
+ rule 10 permit source 172.19.198.0 0.0.0.255
+ rule 15 permit source 172.19.210.0 0.0.0.255
+ rule 20 permit source 172.20.210.0 0.0.0.255
+ rule 25 permit source 10.8.1.0 0.0.0.255
+ rule 30 permit source 10.9.1.0 0.0.0.255
+ rule 35 permit source 172.19.53.204 0.0.0.3
+ rule 36 permit vpn-instance __LOCAL_OAM_VPN__ source 129.0.0.0 0.0.0.255
+ rule 40 permit source 10.8.196.0 0.0.0.255
+ rule 45 deny
+#
+diffserv domain default
+#
+aaa
+ local-user ipbb password cipher %@%@a#L:@~v{S,!'hk5sDA0Te8Uy0>kC,gll/-1nA`=~-yi-8U|e%@%@
+ local-user ipbb service-type terminal ssh
+ local-user ipbb level 15
+ local-user ipbb state block fail-times 3 interval 5
+ authentication-scheme default0
+ authentication-scheme default1
+ authentication-scheme default
+  authentication-mode local radius
+ authentication-scheme aaa
+  authentication-mode local hwtacacs
+ #
+ authorization-scheme default
+ authorization-scheme aaa
+  authorization-mode if-authenticated
+ #
+ accounting-scheme default0
+ accounting-scheme default1
+ accounting-scheme aaa
+  accounting-mode none
+  accounting start-fail online
+ #
+ domain default_admin
+  authentication-scheme aaa
+  authorization-scheme aaa
+  accounting-scheme aaa
+  hwtacacs-server ipbb
+ domain default_8021x
+  accounting-scheme default0
+ #
+ recording-scheme aaa
+  recording-mode hwtacacs ipbb
+ #
+ cmd recording-scheme aaa
+ #
+#
+ntp-service source-interface Vlanif78
+ntp-service unicast-server 172.19.198.20
+ntp-service unicast-server 172.19.198.21
+#
+interface Vlanif78
+ ip address 10.78.1.72 255.255.255.192
+#
+interface Ethernet0/0/0
+ undo shutdown
+ ip binding vpn-instance __LOCAL_OAM_VPN__
+ ip address 129.0.0.1 255.255.255.0
+#
+interface GigabitEthernet0/2/0
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/1
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/2
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/3
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/4
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/5
+ portswitch
+ description BSL8141
+ undo shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 71 to 76 78
+ undo dcn
+#
+interface GigabitEthernet0/2/6
+ portswitch
+ description UPC
+ undo shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 71 to 76 78
+ undo dcn
+ negotiation auto
+#
+interface GigabitEthernet0/2/7
+ portswitch
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/8
+ portswitch
+ description BSL8150
+ undo shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 71 to 76 78
+ undo dcn
+#
+interface GigabitEthernet0/2/9
+ portswitch
+ shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 71 to 76 78
+ undo dcn
+#
+interface GigabitEthernet0/2/10
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/11
+ shutdown
+ undo dcn
+#
+interface NULL0
+#
+ip route-static 0.0.0.0 0.0.0.0 10.78.1.65
+#
+snmp-agent
+snmp-agent local-engineid 800007DB031051722E9017
+snmp-agent community read cipher %^%#W]BpHv=We.zL)'Al$*RA5+C#0E}JQF0aU5,fpib9E+g@Xr>HS!jw}y2+%*n1cZqUJ^Y8WA7THHQtL'>O%^%# mib-view iso-view
+snmp-agent community write cipher %^%#z|J1;*c^M~uvS~(QM(R2WRE+517u{EB9hMG)A'Z'\<4#KoWUbHNNwT+$IVZ%>`5|TAYG91}vrEYNy0FJ%^%# mib-view iso-view
+snmp-agent community complexity-check disable
+snmp-agent sys-info version all
+snmp-agent target-host trap address udp-domain 10.8.196.193 params securityname cipher %^%#jhHC,PN&9ERI$9$Bx6RMq<7{ONcv'!\8`V9EroBJ%^%# v2c private-netmanager
+snmp-agent target-host trap address udp-domain 172.19.198.216 params securityname cipher %^%#Iu^$RQK7k0`.^R>mCzG9#F`J2K-8i"3%x"3]+j'H%^%# v2c private-netmanager
+snmp-agent target-host trap address udp-domain 172.19.198.71 params securityname cipher %^%#n>m\YLx^X$9Tk}G<5`m@uF:gU^%3*O3tKr">wfF7%^%# v2c private-netmanager
+snmp-agent mib-view included iso-view iso
+snmp-agent trap source Vlanif78
+snmp-agent trap enable
+#
+ssh server authentication-retries 5
+undo ssh server compatible-ssh1x enable
+sftp server enable
+stelnet server enable
+ssh client first-time enable
+ssh client 10.8.196.193 assign ecc-key 10.8.196.193
+ssh client 172.19.198.216 assign rsa-key 172.19.198.216
+ssh client 172.19.198.216 assign ecc-key 172.19.198.216
+ssh client 172.19.198.71 assign rsa-key 172.19.198.71
+#
+lldp management-address 10.78.1.72
+#
+user-interface maximum-vty 15
+user-interface con 0
+ authentication-mode password
+ set authentication password cipher $1a$1*0|Qd-J-:$WIn'-"M'^M~(EyHNeoDZQz{o9pksz@`au$N8#f{Q$
+user-interface vty 0 14
+ acl 2100 inbound
+ authentication-mode aaa
+ user privilege level 15
+ protocol inbound ssh
+user-interface vty 16 20
+#
+alarm
+ suppression alarm-name hwGtlResourceUsedUp cause-period 3
+ suppression alarm-name hwGtlNearDeadline cause-period 3
+ suppression alarm-name hwGtlDefaultValueCleared clear-period 0
+ suppression alarm-name hwExtAllMemberDownResume clear-period 3
+ suppression alarm-name hwLcpNegotiateResumed clear-period 10
+ suppression alarm-name hwNcpNegotiateResumed clear-period 10
+ suppression alarm-name hwVplsVcDown cause-period 10
+ suppression alarm-name hwPWVcDown cause-period 10
+ suppression alarm-name hwSvcDown cause-period 10
+ suppression alarm-name hwL2vpnOamDloc cause-period 10
+ suppression alarm-name hwL2vpnOamRdi cause-period 10
+ suppression alarm-name hwL2vpnOamMeg cause-period 10
+ suppression alarm-name hwL2vpnOamMep cause-period 10
+ suppression alarm-name hwL2vpnOamPeriod cause-period 10
+ suppression alarm-name hwL2vpnOamPeriodClear clear-period 2
+ suppression alarm-name hwL2vpnOamAis cause-period 10
+ suppression alarm-name hwL2vpnOamAisClear clear-period 2
+ suppression alarm-name hwL2vpnOamLck cause-period 10
+ suppression alarm-name hwL2vpnOamLckClear clear-period 2
+ suppression alarm-name hwL2vpnOamCsf cause-period 10
+ suppression alarm-name hwL2vpnOamCsfClear clear-period 2
+ suppression alarm-name hwL2vpnOamExcess cause-period 10
+ suppression alarm-name hwL2vpnOamExcessClear clear-period 2
+ suppression alarm-name hwL2vpnOamFail cause-period 10
+ suppression alarm-name hwL2vpnOamFailClear clear-period 2
+ suppression alarm-name hwL2vpnOamDbdi cause-period 10
+ suppression alarm-name hwL2vpnOamDbdiClear clear-period 2
+ suppression alarm-name hwPwApsLost cause-period 10
+ suppression alarm-name hwPwApsLostClear clear-period 2
+ suppression alarm-name hwLoopbackAlarm cause-period 3
+ suppression alarm-name hwLoopbackAlarmResume clear-period 10
+ suppression alarm-name hwPtpTimeLockFail cause-period 0
+ suppression alarm-name hwPtpTimeLockFailResume clear-period 0
+ suppression alarm-name hwPtpExtTimePortLostResume clear-period 3
+ suppression alarm-name hwPtpAcrSyncBadResume clear-period 3
+ alarm-name hwExtAllMemberDownNotify severity major
+ alarm-name hwGtlNearDeadline severity critical
+ alarm-name hwIfMonitorPauseFrameRising severity major
+ alarm-name hwIfMonitorSdhErrorRising severity minor
+ alarm-name hwLacpTotalLinkLoss severity critical
+ alarm-name hwLcpNegotiateFailed severity major
+ alarm-name hwMplsDynamicLabelThresholdExceed severity minor
+ alarm-name hwMplsOamLck severity major
+ alarm-name hwMplsOamLocalLock severity major
+ alarm-name hwMplsOamMep severity critical
+ alarm-name hwMplsTpOamSectionLossOfConnection severity critical
+ alarm-name hwMplsTpOamSectionNearDualLossSD1 severity major
+ alarm-name hwMplsTpOamSectionNearDualLossSD2 severity major
+ alarm-name hwMplsTpOamSectionRemoteDefectIndication severity minor
+ alarm-name hwMplsTpOamSectionUnExpectMeg severity critical
+ alarm-name hwMplsTpOamSectionUnExpectMep severity major
+ alarm-name hwMplsTpOamSectionUnExpectPeriod severity major
+ alarm-name hwNcpNegotiateFailed severity major
+ alarm-name hwPhysicalPortCrcPacketErrorRatio severity critical
+ alarm-name hwRrppRingFail severity minor
+#
+event
+ suppression event-name hwExtLinkDown period 3
+ suppression event-name hwExtLinkUp period 3
+ suppression event-name isisManualAddressDrops period 5
+ suppression event-name isisAuthenticationTypeFailure period 5
+ suppression event-name isisAuthenticationFailure period 5
+ suppression event-name isisVersionSkew period 5
+ suppression event-name isisAreaMismatch period 5
+ suppression event-name isisRejectedAdjacency period 5
+ suppression event-name isisLSPTooLargeToPropagate period 5
+ suppression event-name isisOrigLSPBuffSizeMismatch period 5
+ suppression event-name isisIDLenMismatch period 5
+ suppression event-name isisMaxAreaAddressesMismatch period 5
+ suppression event-name hwVplsVcBackup period 0
+ suppression event-name hwPWVcBackup period 0
+ suppression event-name hwSvcSwitchWtoP period 0
+ suppression event-name hwSvcSwitchPtoW period 0
+ suppression event-name hwLldpDisabled period 0
+ suppression event-name risingAlarm period 0
+ suppression event-name fallingAlarm period 0
+#
+return
