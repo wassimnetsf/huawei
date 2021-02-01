@@ -28,8 +28,8 @@
 # 6        FAN     Present    Registered   Normal     OTHER  0      NA           
 # -------------------------------------------------------------------------------
 !Software Version V300R005C00SPC200
-!Last configuration was updated at 2021-02-01 10:49:25+00:00 by NETCONF2
-!Last configuration was saved at 2021-02-01 03:15:04+00:00 by u2000
+!Last configuration was updated at 2021-02-01 10:54:26+00:00 by NETCONF2
+!Last configuration was saved at 2021-02-01 10:54:25+00:00
 #
 loop-detect trigger enable
 #
@@ -236,7 +236,6 @@ interface GigabitEthernet0/2/1
 interface GigabitEthernet0/2/2
  port-mode 10GE
  portswitch
- description Test
  shutdown
  undo dcn
 #
