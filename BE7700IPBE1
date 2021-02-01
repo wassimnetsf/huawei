@@ -1,0 +1,434 @@
+# Huawei Versatile Routing Platform Software
+# VRP (R) software, Version 8.180 (ATN 910C-F V300R005C00SPC200)
+# Copyright (C) 2012-2018 Huawei Technologies Co., Ltd.
+# Patch Version: V300R005SPH002
+# 
+# ATN 910C-F version information:
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# CXP version information:
+# 
+#   StartupTime   2020/03/13   14:35:35
+#   SDRAM Memory Size   : 4096M bytes
+#   FLASH Memory Size   : 64M bytes
+#   CFCARD Memory Size  : 1640M bytes
+#   ANGMHSTF0110 version information
+#   PCB         Version : ANG1CXPJ REV C
+#   EPLD        Version : V120
+#   FPGA1       Version : V110
+#   PE          Version : 000
+#   BootROM     Version : 08.60
+#   BootLoad    Version : 08.60
+#   Software    Version : Version 8.180 RELEASE 0001
+# ATN 910C-F's Device status:
+# -------------------------------------------------------------------------------
+# Slot #   Type    Online     Register     Status     Role   LsId   Primary      
+# -------------------------------------------------------------------------------
+# 2        CXP     Present    Registered   Normal     MMB    0      Master       
+# 5        PWR     Present    Registered   Normal     OTHER  0      NA           
+# 6        FAN     Present    Registered   Normal     OTHER  0      NA           
+# -------------------------------------------------------------------------------
+!Software Version V300R005C00SPC200
+!Last configuration was updated at 2020-10-02 14:33:25+00:00 by tmodrz
+!Last configuration was saved at 2021-02-01 03:15:04+00:00 by u2000
+#
+loop-detect trigger enable
+#
+sysname BE7700IPBE1
+#
+set neid b47c42
+lldp enable-dcn authentication %^%#/vH]8;MUZ$kCQ=R-i!<-CADoCJ*zC3k]UwY)bg($%^%#
+#
+undo user-security-policy enable
+#
+ntp-service server disable
+ntp-service ipv6 server disable
+ntp-service source-interface Vlanif90
+ntp-service unicast-server 172.19.198.20
+ntp-service unicast-server 172.19.198.21
+#
+vlan batch 51 to 56 90 to 92
+#
+rsa peer-public-key 10.8.196.193
+ public-key-code begin
+ 3082010A
+  02820101
+    00CE2D8C 39FF636D 6BC17C55 E21FE99A 1C1847AC 42CCD295 27CDD01C 2D7D2F37
+    A5325BF7 9E69422E 9F51F9DB 23E497F3 0D34CEC0 9AB19677 1AA89BB4 D348759A
+    C10EA32F 1E21C32B E34E39D1 DA5680DB B7588476 5294B167 BBDE66C7 87D60D1B
+    E1959268 00928335 38C83A13 FE526567 E3A213EB 2A9301D8 E336F698 6AE51D90
+    A402940B CBBDCB3C BA70959B DE126275 D3F3D4C6 29A9B409 61DADA8F FA7E111E
+    33DD5F55 AC81BF9A CBBEF0F3 3B6D91A6 1D743194 A87A4114 EF5CB8DD DAE11276
+    F8EF257D C5320D76 41213EA4 2F547648 6B2601A9 BE2B314E 5DB1C37B 298136F9
+    50AC78C7 3662D9C9 59D499C1 F2B4AA8A FD13A660 17BCAA79 BF120B91 AAF70C9F
+    25
+  0203
+    010001
+ public-key-code end
+ peer-public-key end
+#
+ecc peer-public-key 10.8.196.193
+ public-key-code begin
+  04C55198 EFFD6E18 3B30586F 23A9CB9E 7A341CC1 EC290DEE F5FF2CAE 89D3BF6D
+  D66D707D 43544533 1FDCA92A A23218E6 734F7519 F2714C7E 084B4C86 AF94408A
+  86
+ public-key-code end
+ peer-public-key end
+#
+dot1x-template 1
+#
+undo telnet server enable
+#
+diffserv domain default
+#
+ptp profile g-8275-1 enable
+ptp enable
+ptp domain 26
+ptp device-type t-bc
+ptp virtual-clock-id 37373030
+#
+clock ethernet-synchronization enable
+#
+soc
+#
+priority-template default
+#
+ip vpn-instance __LOCAL_OAM_VPN__
+ ipv4-family
+ ipv6-family
+#
+hwtacacs-server template ipbb
+ hwtacacs-server authentication 172.19.198.219
+ hwtacacs-server authentication 172.19.198.192 secondary
+ hwtacacs-server authorization 172.19.198.219
+ hwtacacs-server authorization 172.19.198.192 secondary
+ hwtacacs-server accounting 172.19.198.219
+ hwtacacs-server accounting 172.19.198.192 secondary
+ hwtacacs-server source-ip 10.90.15.131
+ hwtacacs-server shared-key cipher %^%#BWOy4b]m{7H;sr5Ni1t6_.;.W(h$lOK;9eF&[P{D%^%#
+ hwtacacs-server timer response-timeout 30
+ hwtacacs-server user-name original
+#
+vlan 51
+ name 3G_UP
+#
+vlan 52
+ name 3G_MP
+#
+vlan 53
+ name 2G_UP
+#
+vlan 54
+ name 2G_MP
+#
+vlan 55
+ name 4G_UP
+#
+vlan 56
+ name 4G_MP
+#
+vlan 90
+ name ATN_OM
+#
+vlan 91
+ name 5G_UPCP
+#
+vlan 92
+ name 5G_MP
+#
+acl number 2100
+ description ssh
+ rule 5 permit source 10.9.9.253 0
+ rule 10 permit source 172.19.198.0 0.0.0.255
+ rule 15 permit source 172.19.210.0 0.0.0.255
+ rule 20 permit source 172.20.210.0 0.0.0.255
+ rule 25 permit source 10.8.1.0 0.0.0.255
+ rule 30 permit source 10.9.1.0 0.0.0.255
+ rule 35 permit source 172.19.53.204 0.0.0.3
+ rule 36 permit vpn-instance __LOCAL_OAM_VPN__ source 129.0.0.0 0.0.0.255
+ rule 40 permit source 10.8.196.0 0.0.0.255
+ rule 45 deny
+#
+aaa
+ local-user ipbb password irreversible-cipher $1c$&D};)_G^*Y$CEl9/f:"K*'OVJ"tJ|DX+8o'Jf^Kf#+Jk@1V{Sh*$
+ local-user ipbb service-type terminal ssh
+ local-user ipbb level 3
+ local-user ipbb state block fail-times 10 interval 5
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+  authentication-mode local radius
+ #
+ authentication-scheme aaa
+  authentication-mode hwtacacs local
+ #
+ authorization-scheme default
+ #
+ authorization-scheme aaa
+  authorization-mode hwtacacs local
+  authorization-cmd 1 hwtacacs local
+  authorization-cmd 3 hwtacacs local
+  authorization-cmd 15 hwtacacs local
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ accounting-scheme aaa
+  accounting-mode none
+  accounting start-fail online
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+  authentication-scheme aaa
+  authorization-scheme aaa
+  accounting-scheme aaa
+  hwtacacs-server ipbb
+ #
+ recording-scheme aaa
+  recording-mode hwtacacs ipbb
+ #
+ cmd recording-scheme aaa
+#
+license
+ active port-basic slot 2 port 0-29
+ active port-mode-channel slot 2 port 0-4
+#
+interface Vlanif90
+ ip address 10.90.15.131 255.255.255.192
+#
+interface Ethernet0/0/0
+ undo shutdown
+ ip binding vpn-instance __LOCAL_OAM_VPN__
+ ip address 129.0.0.1 255.255.255.0
+#
+interface GigabitEthernet0/2/0
+ port-mode 10GE
+ portswitch
+ bandwidth 10000
+ description DF 38275
+ undo shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 51 to 56 90 to 92
+ undo dcn
+ clock synchronization enable
+ clock priority 1
+ ptp notslave disable
+ ptp enable
+#
+interface GigabitEthernet0/2/1
+ port-mode 10GE
+ portswitch
+ bandwidth 10000
+ description To BEL2242
+ undo shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 51 to 56 90 to 92
+ undo dcn
+ clock synchronization enable
+ ptp enable
+#
+interface GigabitEthernet0/2/2
+ port-mode 10GE
+ portswitch
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/3
+ port-mode 10GE
+ portswitch
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/4
+ portswitch
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/5
+ portswitch
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/6
+ portswitch
+ description To BEL7700
+ undo shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 51 to 56 90 to 92
+ undo dcn
+ negotiation auto
+ clock synchronization enable
+ ptp enable
+#
+interface GigabitEthernet0/2/7
+ portswitch
+ shutdown
+ undo dcn
+ negotiation auto
+#
+interface GigabitEthernet0/2/8
+ portswitch
+ shutdown
+ undo dcn
+ negotiation auto
+#
+interface GigabitEthernet0/2/9
+ portswitch
+ shutdown
+ undo dcn
+ negotiation auto
+#
+interface GigabitEthernet0/2/10
+ portswitch
+ shutdown
+ undo dcn
+ negotiation auto
+#
+interface GigabitEthernet0/2/11
+ portswitch
+ shutdown
+ undo dcn
+ negotiation auto
+#
+interface GigabitEthernet0/2/12
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/13
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/14
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/15
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/16
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/17
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/18
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/19
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/20
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/21
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/22
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/23
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/24
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/25
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/26
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/27
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/28
+ undo shutdown
+ undo dcn
+#
+interface GigabitEthernet0/2/29
+ undo shutdown
+ undo dcn
+#
+interface NULL0
+#
+undo dcn
+#
+ip route-static 0.0.0.0 0.0.0.0 10.90.15.129
+#
+snmp-agent
+snmp-agent local-engineid 800007DB0304BD7054E26F
+snmp-agent community read cipher %^%#VU,V;^i9b2)o|gQYEvf!:FX8Yrv.:A##(7Y#v^C9{+V31Y`y*~)bp5-a8mOA9lp-Re_;0Lav`q.4)>v-%^%# mib-view iso-view
+snmp-agent community write cipher %^%#qr((XbL,hI4&=&Ij{lK>jVY|V+cS77#8bV!v"Z8QbsZb5YT`U!f3Z-Q.@+jYN1]:%Y066@#zjaCSJG%F%^%# mib-view iso-view
+#
+snmp-agent sys-info version all
+snmp-agent community complexity-check disable
+snmp-agent target-host host-name __targetHost_1_38756 trap address udp-domain 172.19.198.216 params securityname cipher %^%#A4)z>/F[wIK/V<#*jajHd(X(0ZEJ.##nV1/Ab27Z%^%# v2c private-netmanager
+snmp-agent target-host host-name __targetHost_2_21914 trap address udp-domain 10.8.196.193 params securityname cipher %^%#5Y>,OG_p>>ZW>N1=Nyg4Z.fU6RAzP01#;:7yB5#S%^%# v2c private-netmanager
+#
+snmp-agent mib-view included iso-view iso
+#
+snmp-agent trap source Vlanif90
+#
+snmp-agent trap enable
+#
+lldp enable
+#
+lldp management-address 10.90.15.131
+#
+stelnet server enable
+sftp server enable
+snetconf server enable
+ssh authorization-type default aaa
+#
+ssh server cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr aes128_cbc
+ssh server hmac sha2_512 sha2_256 sha1
+ssh server key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+ssh server publickey ecc rsa
+#
+ssh server dh-exchange min-len 2048
+#
+ssh client first-time enable
+ssh client peer 10.8.196.193 assign ecc-key 10.8.196.193
+ssh client peer 10.8.196.193 assign rsa-key 10.8.196.193
+#
+ssh client publickey ecc rsa
+#
+ssh client cipher aes256_gcm aes128_gcm aes256_ctr aes192_ctr aes128_ctr aes128_cbc
+ssh client hmac sha2_512 sha2_256 sha1
+ssh client key-exchange dh_group_exchange_sha256 dh_group_exchange_sha1 dh_group14_sha1 ecdh_sha2_nistp256 ecdh_sha2_nistp384 ecdh_sha2_nistp521
+#
+user-interface maximum-vty 15
+#
+user-interface con 0
+ authentication-mode password
+ set authentication password cipher $1c$_f=y:AxDn<$i1W;T<}'+U_D`}Ptv##AZVj`NOy\%@8M[aKc&`Q:$
+#
+user-interface vty 0 14
+ acl 2100 inbound
+ authentication-mode aaa
+ user privilege level 3
+ protocol inbound ssh
+#
+local-aaa-server
+#
+return
