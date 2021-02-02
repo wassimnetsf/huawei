@@ -1,0 +1,780 @@
+# Huawei Versatile Routing Platform Software
+# VRP (R) software, Version 8.60 (NE40E V800R005C01SPC200)
+# Copyright (C) 2012-2013 Huawei Technologies Co., Ltd.
+# Patch Version: V800R005SPH022
+# 
+# NE40E-X2-M8 version information:
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# BKP  version information:
+#   PCB         Version : CX68BKP02B REV B
+#   MPU  Slot  Quantity : 2
+#   NPU  Slot  Quantity : 2
+#   CARD Slot  Quantity : 8
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# MPU version information:
+# 
+#   StartupTime 2019/02/18   10:31:32
+#   SDRAM Memory Size   : 2048 M bytes
+#   FLASH Memory Size   : 16 M bytes
+#   NVRAM Memory Size   : 4096 K bytes
+#   CFCARD Memory Size  : 2048 M bytes
+#   CR5D00MPUK70 version information:
+#   PCB         Version : CX68MPUK REV B
+#   EPLD        Version : 106
+#   FPGA        Version : 107
+#   BootROM     Version : 03.46
+#   BootLoad    Version : 03.46
+# 
+#   StartupTime 2019/02/18   10:32:11
+#   SDRAM Memory Size   : 2048 M bytes
+#   FLASH Memory Size   : 16 M bytes
+#   NVRAM Memory Size   : 4096 K bytes
+#   CFCARD Memory Size  : 2048 M bytes
+#   CR5D00MPUK70 version information:
+#   PCB         Version : CX68MPUK REV B
+#   EPLD        Version : 106
+#   FPGA        Version : 107
+#   BootROM     Version : 03.46
+#   BootLoad    Version : 03.46
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# NPU version information:
+# 
+#   StartupTime 2019/02/18   10:33:33
+#   Host processor :
+#   SDRAM Memory Size   : 2048 M bytes
+#   Flash Memory Size   : 64 M bytes
+#   LPU CR5DNPU50E70 version information:
+#   PCB Version         : CX68NPU50 REV B
+#   EPLD Version        : 301
+#   FPGA Version        : 010
+#   NP Version          : 100
+#   TM  Version         : 110
+#   BootROM Version     : 03.46
+#   BootLoad Version    : 03.46
+#   NSE version information:
+#   PCB Version         : NSE REV A
+#   CMAC Version        : 110
+#   PIC1: CR5D00E8GF71 version information: 
+#   StartupTime         : 2019/02/18   10:33:42
+#   PCB Version         : CX68E8GFC REV A
+#   FPGA Version        : 002
+#   PIC5: CR5D00E8GF71 version information: 
+#   StartupTime         : 2019/02/18   10:33:50
+#   PCB Version         : CX68E8GFC REV A
+#   FPGA Version        : 002
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Power version information: 
+# 
+# POWER13's version information:
+#   PCB     Version : CX68PSUC REV B
+# 
+# POWER14's version information:
+#   PCB     Version : CX68PSUC REV B
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# FAN version information: 
+# 
+# FAN15's version information:
+#   PCB     Version : CX67FCBB REV A
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+# CLK version information:
+# 
+#          StartupTime 2019/02/18   10:31:57
+#   FPGA     Version : 007
+#   DSP      Version : 221
+# 
+#          StartupTime 2019/02/18   10:32:21
+#   FPGA     Version : 007
+#   DSP      Version : 221
+# NE40E-X2-M8's Device status:
+# -------------------------------------------------------------------------------
+# Slot #   Type    Online     Register     Status     Role   LsId   Primary      
+# -------------------------------------------------------------------------------
+# 1        PIC     Present    Registered   Normal     OTHER  0      NA           
+# 5        PIC     Present    Registered   Normal     OTHER  0      NA           
+# 9        NPU     Present    Registered   Normal     LC     0      Master       
+# 11       MPU     Present    Registered   Normal     MMB    0      Master       
+# 12       MPU     Present    Registered   Normal     MMB    0      Slave        
+# 13       PWR     Present    Registered   Normal     OTHER  0      NA           
+# 14       PWR     Present    Registered   Normal     OTHER  0      NA           
+# 15       FAN     Present    Registered   Normal     OTHER  0      NA           
+# 16       CLK     Present    Registered   Normal     OTHER  0      Master       
+# 17       CLK     Present    Registered   Normal     OTHER  0      Slave        
+# -------------------------------------------------------------------------------
+!Software Version V800R005C01SPC200
+!Last configuration was updated at 2021-01-13 15:50:39+01:00 by ggineste
+!Last configuration was saved at 2021-02-02 02:00:21+01:00 by u2000
+#
+clock timezone SWITZERLAND add 01:00:00
+clock daylight-saving-time SWITZERLAND repeating 02:00 last Sun Mar 02:00 last Sun Oct 01:00 
+#
+sysname ZH0805IPSG1
+#
+set neid 21ca84
+#
+FTP client-source -i LoopBack0
+#
+set energy-mode mode basic
+#
+undo user-security-policy enable
+#
+undo loopback autoclear
+#
+ntp-service source-interface LoopBack0
+ntp-service unicast-server 172.19.198.20
+ntp-service unicast-server 172.19.198.21
+#
+alarm
+ suppression alarm-name hwLcdAlarm cause-period 3
+ suppression alarm-name hwLcdAlarm clear-period 3
+ suppression alarm-name hwIfMonitorInputRateRising cause-period 3
+ suppression alarm-name hwIfMonitorInputRateRising clear-period 10
+ alarm-name hwIfMonitorInputRateRising severity Warning
+ suppression alarm-name hwIfMonitorOutputRateRising cause-period 3
+ suppression alarm-name hwIfMonitorOutputRateRising clear-period 10
+ alarm-name hwIfMonitorOutputRateRising severity Warning
+ suppression alarm-name hwIfMonitorCrcErrorRising cause-period 3
+ suppression alarm-name hwIfMonitorCrcErrorRising clear-period 10
+ suppression alarm-name hwIpv4PrefixExceed cause-period 3
+ suppression alarm-name hwIpv4PrefixExceed clear-period 10
+ suppression alarm-name hwIpv6PrefixExceed cause-period 3
+ suppression alarm-name hwIpv6PrefixExceed clear-period 10
+ suppression alarm-name linkDown cause-period 3
+ suppression alarm-name linkDown clear-period 10
+ alarm-name linkDown severity Critical
+ suppression alarm-name isisAdjacencyChange cause-period 3
+ suppression alarm-name hwLacpNegotiateFailed cause-period 3
+ suppression alarm-name hwLacpNegotiateFailed clear-period 3
+ suppression alarm-name hwLacpTotalLinkLoss cause-period 3
+ suppression alarm-name hwLacpTotalLinkLoss clear-period 3
+ alarm-name hwLacpTotalLinkLoss severity Critical
+ suppression alarm-name hwLacpPartialLinkLoss cause-period 3
+ suppression alarm-name hwLacpPartialLinkLoss clear-period 3
+ suppression alarm-name hwLoopbackAlarm cause-period 3
+ suppression alarm-name hwLoopbackAlarm clear-period 10
+ suppression alarm-name hwGtlNearDeadline cause-period 3
+ suppression alarm-name hwGtlDefaultValue cause-period 3
+ alarm-name hwGtlDefaultValue severity Major
+ suppression alarm-name hwMacLimitNumRaisingThreshold cause-period 3
+ suppression alarm-name hwMacLimitNumRaisingThreshold clear-period 3
+ suppression alarm-name hwPtpTimeLockFail cause-period 0
+ suppression alarm-name hwPtpTimeLockFail clear-period 0
+ alarm-name hwPtpTimeLockFail severity Major
+ suppression alarm-name hwPtpExtTimePortLost clear-period 3
+ alarm-name hwPtpExtTimePortLost severity Minor
+ suppression alarm-name hwPtpAcrSyncBad clear-period 3
+ alarm-name hwPtpAcrSyncBad severity Minor
+ #
+ mask name 2020_NSC
+ #
+ snmp target-host __targetHost_2_55062 mask name 2020_NSC
+#
+vlan batch 61 to 66 68 93 to 94
+#
+undo telnet server enable
+#
+diffserv domain default
+#
+ptp-adaptive enable
+ptp-adaptive device-type server
+ptp-adaptive acr unicast-negotiate enable
+ptp-adaptive local-ip 10.44.0.90
+ptp-adaptive vpn-instance MBH_SYNC
+#
+clock ssm-control on
+#
+ip vpn-instance MBH_2G_ABIS
+ ipv4-family 
+  route-distinguisher 65535:1024008051
+  vpn-target 65535:10240 export-extcommunity
+  vpn-target 65535:10241 import-extcommunity
+#
+ip vpn-instance MBH_3G_IUB
+ ipv4-family 
+  route-distinguisher 65535:1031008051
+  vpn-target 65535:10310 export-extcommunity
+  vpn-target 65535:10311 import-extcommunity
+#
+ip vpn-instance MBH_4G_S1
+ ipv4-family 
+  route-distinguisher 65535:1045008051
+  vpn-target 65535:10450 export-extcommunity
+  vpn-target 65535:10451 import-extcommunity
+#
+ip vpn-instance MBH_SYNC
+ ipv4-family 
+  route-distinguisher 65535:1016008051
+  import route-policy ptp-import
+  vpn-target 65535:10241 export-extcommunity
+  vpn-target 65535:10311 export-extcommunity
+  vpn-target 65535:10451 export-extcommunity
+  vpn-target 65535:10240 import-extcommunity
+  vpn-target 65535:10310 import-extcommunity
+  vpn-target 65535:10450 import-extcommunity
+#
+ip vpn-instance OM_2G
+ ipv4-family 
+  route-distinguisher 65535:1022008051
+  vpn-target 65535:10220 export-extcommunity
+  vpn-target 65535:10221 import-extcommunity
+#
+ip vpn-instance OM_3G
+ ipv4-family 
+  route-distinguisher 65535:1032008051
+  vpn-target 65535:10320 export-extcommunity
+  vpn-target 65535:10321 import-extcommunity
+#
+ip vpn-instance OM_4G
+ ipv4-family 
+  route-distinguisher 65535:1042008051
+  vpn-target 65535:10420 export-extcommunity
+  vpn-target 65535:10421 import-extcommunity
+#
+ip vpn-instance OM_5G
+ ipv4-family 
+  route-distinguisher 10.80.8.103:10520
+  vpn-target 65535:10520 export-extcommunity
+  vpn-target 65535:10521 import-extcommunity
+#
+ip vpn-instance OM_TX
+ ipv4-family 
+  route-distinguisher 65535:1092008051
+  vpn-target 65535:10920 export-extcommunity
+  vpn-target 65535:10921 import-extcommunity
+#
+hwtacacs-server template ipbb
+ hwtacacs-server authentication 172.19.198.219
+ hwtacacs-server authentication 172.19.198.192 secondary
+ hwtacacs-server authorization 172.19.198.219
+ hwtacacs-server authorization 172.19.198.192 secondary
+ hwtacacs-server accounting 172.19.198.219
+ hwtacacs-server accounting 172.19.198.192 secondary
+ hwtacacs-server source-ip 10.80.8.103
+ hwtacacs-server shared-key cipher %@%@P2K^SPPfHYJ$SA@O:pcM"U%x%@%@
+ hwtacacs-server timer response-timeout 30
+ undo hwtacacs-server user-name domain-included
+#
+rsa peer-public-key 10.8.196.193
+ public-key-code begin
+ 3082010A
+  02820101
+    00CE2D8C 39FF636D 6BC17C55 E21FE99A 1C1847AC 42CCD295 27CDD01C 2D7D2F37
+    A5325BF7 9E69422E 9F51F9DB 23E497F3 0D34CEC0 9AB19677 1AA89BB4 D348759A
+    C10EA32F 1E21C32B E34E39D1 DA5680DB B7588476 5294B167 BBDE66C7 87D60D1B
+    E1959268 00928335 38C83A13 FE526567 E3A213EB 2A9301D8 E336F698 6AE51D90
+    A402940B CBBDCB3C BA70959B DE126275 D3F3D4C6 29A9B409 61DADA8F FA7E111E
+    33DD5F55 AC81BF9A CBBEF0F3 3B6D91A6 1D743194 A87A4114 EF5CB8DD DAE11276
+    F8EF257D C5320D76 41213EA4 2F547648 6B2601A9 BE2B314E 5DB1C37B 298136F9
+    50AC78C7 3662D9C9 59D499C1 F2B4AA8A FD13A660 17BCAA79 BF120B91 AAF70C9F
+    25
+  0203
+    010001
+ public-key-code end
+ peer-public-key end
+ #
+rsa peer-public-key 172.19.198.216
+ public-key-code begin
+ 3082010A
+  02820101
+    00C4E1E1 DACE3F3B 67D2DB39 A1A78699 4028A80A BDFD5BC8 9E0AA032 F1F2AF0E
+    8FDF300D 5C313343 55765A81 9F4C27B3 13FE6490 3BA650FE 4CA0C5E7 F5EA3C0F
+    314F7BCC 0EFBFD60 D86DB752 B10A5BED 6B5AA28F 5E2754FA D6ABBEE6 4A157D92
+    3670D61F 573304C2 49FEA672 C0976589 7E71237D 51E97594 157C043F 6FF74796
+    BD94FB7C 4300DD1B 30678985 ADF485F6 6AED0E16 E490DAAE BE79B9B3 02964DBB
+    BD21D17B FDA8C9DC B9CF6524 CAA23260 6577CF08 FBBEB0B3 66C8EFED 170B5331
+    9B4D6EB0 C3B36174 454DF0E5 C4179277 07A400C2 D87AFDA6 B5398D7C FB4D150E
+    629EFAC6 E7F863F4 0A5DAF26 5FEBABD7 E8E194C6 3C0E94A6 BD5FE3C2 60D9357A
+    A7
+  0203
+    010001
+ public-key-code end
+ peer-public-key end
+ #
+bfd
+#
+mpls lsr-id 10.80.8.103
+#
+mpls
+ mpls te
+ mpls rsvp-te
+ mpls rsvp-te bfd all-interfaces enable
+ mpls rsvp-te hello
+#
+mpls ldp
+ graceful-restart
+ md5-password cipher 10.80.8.99 %@%@s,e3QY|S1&D1}0#7pZ>6,$v2%@%@
+ #
+ ipv4-family
+#
+acl number 2100
+ description ssh
+ rule 5 permit source 10.9.9.253 0
+ rule 10 permit source 172.19.198.0 0.0.0.255
+ rule 15 permit source 172.19.210.0 0.0.0.255
+ rule 20 permit source 172.20.210.0 0.0.0.255
+ rule 25 permit source 10.8.1.0 0.0.0.255
+ rule 30 permit source 10.9.1.0 0.0.0.255
+ rule 35 permit source 172.19.53.204 0.0.0.3
+ rule 40 permit source 10.8.196.0 0.0.0.255
+ rule 45 deny
+#
+aaa
+ local-user ipbb password irreversible-cipher $1a$x;}%/}VNDH$.83Z14~th!#5I&!T}y@+A>BaXwdvH%MZ=qEpCBVW$
+ local-user ipbb service-type terminal ssh
+ local-user ipbb level 15
+ local-user ipbb state block fail-times 3 interval 5
+ #
+ authentication-scheme default0
+ #
+ authentication-scheme default1
+ #
+ authentication-scheme default
+ #
+ authentication-scheme aaa
+  authentication-mode hwtacacs local
+ #
+ authorization-scheme default
+ #
+ authorization-scheme aaa
+  authorization-mode hwtacacs local
+  authorization-cmd 1 hwtacacs local
+  authorization-cmd 3 hwtacacs local
+  authorization-cmd 15 hwtacacs local
+ #
+ accounting-scheme default0
+ #
+ accounting-scheme default1
+ #
+ accounting-scheme aaa
+  accounting-mode hwtacacs
+ #
+ domain default0
+ #
+ domain default1
+ #
+ domain default_admin
+  authentication-scheme aaa
+  authorization-scheme aaa
+  accounting-scheme aaa
+  hwtacacs-server ipbb
+ #
+ recording-scheme aaa
+  recording-mode hwtacacs ipbb
+ #
+ cmd recording-scheme aaa
+#
+isis 1
+ is-level level-2
+ cost-style wide
+ timer lsp-generation 1 1 50 level-2
+ flash-flood level-2
+ bfd all-interfaces enable
+ bfd all-interfaces min-tx-interval 30 min-rx-interval 30
+ network-entity 49.0041.0001.0100.8000.8103.00
+ is-name ZH0805IPSG1
+ timer spf 1 1 50
+ traffic-eng level-2
+ maximum load-balancing 1
+ timer lsp-max-age 65535
+ timer lsp-refresh 65234
+ prefix-priority level-2 critical ip-prefix SYSTEM_LOOPBACKS
+#
+interface Vlanif61
+ description MW_IC_MBH_3G_IUB
+ ip binding vpn-instance MBH_3G_IUB
+ ip address 10.61.66.222 255.255.255.224
+#
+interface Vlanif62
+ description MW_IC_OM_3G
+ ip binding vpn-instance OM_3G
+ ip address 10.62.66.222 255.255.255.224
+#
+interface Vlanif63
+ description MW_IC_MBH_2G_ABIS
+ ip binding vpn-instance MBH_2G_ABIS
+ ip address 10.63.66.222 255.255.255.224
+#
+interface Vlanif64
+ description MW_IC_OM_2G
+ ip binding vpn-instance OM_2G
+ ip address 10.64.66.222 255.255.255.224
+#
+interface Vlanif65
+ description MW_IC_MBH_4G_S1
+ ip binding vpn-instance MBH_4G_S1
+ ip address 10.65.66.222 255.255.255.224
+#
+interface Vlanif66
+ description MW_IC_OM_4G
+ ip binding vpn-instance OM_4G
+ ip address 10.66.66.222 255.255.255.224
+#
+interface Vlanif68
+ description MW_IC_OM_TX
+ ip binding vpn-instance OM_TX
+ ip address 10.68.142.190 255.255.255.224
+#
+interface Vlanif93
+ description MBH_5G_S1
+ ip binding vpn-instance MBH_4G_S1
+ ip address 10.93.198.193 255.255.255.224
+#
+interface Vlanif94
+ description OM_5G
+ ip binding vpn-instance OM_5G
+ ip address 10.94.198.193 255.255.255.224
+#
+interface GigabitEthernet0/0/0
+ speed auto
+ duplex auto
+ shutdown
+#
+interface GigabitEthernet0/1/0
+ mtu 9600
+ description BB:SG9901IPSG1/G1/1/3: OCH-DWDM
+ undo shutdown
+ set flow-stat interval 30
+ ip address 10.80.161.173 255.255.255.252
+ isis enable 1
+ isis circuit-type p2p
+ isis authentication-mode md5 cipher %@%@g\8FFUIu!LyJN98d0w]>,$bw%@%@
+ isis cost 1000
+ isis ldp-sync
+ mpls
+ mpls te
+ mpls rsvp-te
+ mpls rsvp-te hello
+ mpls rsvp-te authentication cipher %@%@cJ=N~~5kP))lj2Vp1\@O,$b~%@%@
+ mpls ldp
+ clock synchronization enable
+ clock priority 1
+ undo dcn
+ trust upstream default
+ trust 8021p
+#
+interface GigabitEthernet0/1/1
+ negotiation auto
+ portswitch
+ description ZH0805-TN1
+ undo shutdown
+ port link-type trunk
+ port trunk allow-pass vlan 61 to 66 68 93 to 94
+ undo dcn
+ trust upstream default vlan 61 to 66 68 93 to 94 
+ trust 8021p vlan 61 to 66 68 93 to 94 
+#
+interface GigabitEthernet0/1/2
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/1/3
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/1/4
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/1/5
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/1/6
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/1/7
+ shutdown
+ undo dcn
+#
+*interface GigabitEthernet0/2/0
+* undo shutdown
+* undo dcn
+#
+*interface GigabitEthernet0/2/1
+* undo shutdown
+* undo dcn
+#
+*interface GigabitEthernet0/2/2
+* undo shutdown
+* undo dcn
+#
+*interface GigabitEthernet0/2/3
+* undo shutdown
+* undo dcn
+#
+*interface GigabitEthernet0/2/4
+* undo shutdown
+* undo dcn
+#
+*interface GigabitEthernet0/2/5
+* undo shutdown
+* undo dcn
+#
+*interface GigabitEthernet0/2/6
+* undo shutdown
+* undo dcn
+#
+*interface GigabitEthernet0/2/7
+* undo shutdown
+* undo dcn
+#
+interface GigabitEthernet0/5/0
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/5/1
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/5/2
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/5/3
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/5/4
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/5/5
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/5/6
+ shutdown
+ undo dcn
+#
+interface GigabitEthernet0/5/7
+ shutdown
+ undo dcn
+#
+interface LoopBack0
+ description SYSTEM_LOOPBACK
+ ip address 10.80.8.103 255.255.255.255
+ isis enable 1
+#
+interface LoopBack234
+ description PTPv2-Server
+ ip binding vpn-instance MBH_SYNC
+ ip address 10.44.0.90 255.255.255.255
+#
+interface NULL0
+#
+bgp 65535
+ router-id 10.80.8.103
+ undo default ipv4-unicast
+ graceful-restart
+ graceful-restart timer wait-for-rib 480
+ group MBH_AS65535_ASR9K internal
+ peer MBH_AS65535_ASR9K description to_Cisco_ASR9K_OM
+ peer MBH_AS65535_ASR9K connect-interface LoopBack0
+ peer 10.80.0.7 as-number 65535
+ peer 10.80.0.7 group MBH_AS65535_ASR9K
+ peer 10.80.0.7 description CR-ASR9K-1
+ peer 10.80.0.8 as-number 65535
+ peer 10.80.0.8 group MBH_AS65535_ASR9K
+ peer 10.80.0.8 description CR-ASR9K-2
+ group RouteReflector internal
+ peer RouteReflector description to_Route_Reflectors
+ peer RouteReflector connect-interface LoopBack0
+ peer 10.80.0.141 as-number 65535
+ peer 10.80.0.141 group RouteReflector
+ peer 10.80.0.141 description cr-rr-asr1k-2
+ peer 10.80.0.142 as-number 65535
+ peer 10.80.0.142 group RouteReflector
+ peer 10.80.0.142 description in-rr-asr1k-2
+ #
+ ipv4-family unicast
+  undo synchronization
+  undo peer MBH_AS65535_ASR9K enable
+  undo peer RouteReflector enable
+  undo peer 10.80.0.7 enable
+  undo peer 10.80.0.8 enable
+  undo peer 10.80.0.141 enable
+  undo peer 10.80.0.142 enable
+ #
+ ipv4-family vpnv4
+  policy vpn-target
+  peer MBH_AS65535_ASR9K enable
+  peer MBH_AS65535_ASR9K advertise-community
+  peer 10.80.0.7 enable
+  peer 10.80.0.7 group MBH_AS65535_ASR9K
+  peer 10.80.0.8 enable
+  peer 10.80.0.8 group MBH_AS65535_ASR9K
+  peer RouteReflector enable
+  peer RouteReflector advertise-community
+  peer 10.80.0.141 enable
+  peer 10.80.0.141 group RouteReflector
+  peer 10.80.0.142 enable
+  peer 10.80.0.142 group RouteReflector
+ #
+ ipv4-family vpn-instance MBH_2G_ABIS
+  import-route direct  
+  import-route static  
+ #
+ ipv4-family vpn-instance MBH_3G_IUB
+  import-route direct  
+  import-route static  
+ #
+ ipv4-family vpn-instance MBH_4G_S1
+  preference route-policy IPSEC_UNR_IM
+  import-route direct  
+  import-route static  
+ #
+ ipv4-family vpn-instance MBH_SYNC
+  import-route direct  
+ #
+ ipv4-family vpn-instance OM_2G
+  import-route direct  
+  import-route static  
+ #
+ ipv4-family vpn-instance OM_3G
+  import-route direct  
+  import-route static  
+ #
+ ipv4-family vpn-instance OM_4G
+  import-route direct  
+  import-route static  
+ #
+ ipv4-family vpn-instance OM_5G
+  import-route direct  
+  import-route static  
+ #
+ ipv4-family vpn-instance OM_TX
+  import-route direct  
+  import-route static  
+#
+undo dcn
+#
+route-policy IPSEC_UNR_IM permit node 10
+ if-match community-filter IPSEC_UNR_IM 
+ apply preference 59
+#
+route-policy ptp-import permit node 1
+#
+ip ip-prefix SYSTEM_LOOPBACKS index 10 permit 10.80.0.0 19 greater-equal 32 less-equal 32
+ip community-filter basic IPSEC_UNR_IM permit 10411
+#
+ip route-static vpn-instance MBH_4G_S1 10.67.66.193 255.255.255.255 10.65.66.193
+ip route-static vpn-instance MBH_4G_S1 10.67.66.194 255.255.255.255 10.65.66.194
+ip route-static vpn-instance MBH_4G_S1 10.67.66.195 255.255.255.255 10.65.66.195
+ip route-static vpn-instance MBH_4G_S1 10.67.66.196 255.255.255.255 10.65.66.196
+ip route-static vpn-instance MBH_4G_S1 10.67.66.197 255.255.255.255 10.65.66.197
+ip route-static vpn-instance MBH_4G_S1 10.67.66.198 255.255.255.255 10.65.66.198
+ip route-static vpn-instance MBH_4G_S1 10.67.66.199 255.255.255.255 10.65.66.199
+ip route-static vpn-instance MBH_4G_S1 10.67.66.200 255.255.255.255 10.65.66.200
+ip route-static vpn-instance MBH_4G_S1 10.67.66.201 255.255.255.255 10.65.66.201
+ip route-static vpn-instance MBH_4G_S1 10.67.66.202 255.255.255.255 10.65.66.202
+ip route-static vpn-instance MBH_4G_S1 10.67.66.203 255.255.255.255 10.65.66.203
+ip route-static vpn-instance MBH_4G_S1 10.67.66.204 255.255.255.255 10.65.66.204
+ip route-static vpn-instance MBH_4G_S1 10.67.66.205 255.255.255.255 10.65.66.205
+ip route-static vpn-instance MBH_4G_S1 10.67.66.206 255.255.255.255 10.65.66.206
+ip route-static vpn-instance MBH_4G_S1 10.67.66.207 255.255.255.255 10.65.66.207
+ip route-static vpn-instance MBH_4G_S1 10.67.66.208 255.255.255.255 10.65.66.208
+ip route-static vpn-instance MBH_4G_S1 10.67.66.209 255.255.255.255 10.65.66.209
+ip route-static vpn-instance MBH_4G_S1 10.67.66.210 255.255.255.255 10.65.66.210
+ip route-static vpn-instance MBH_4G_S1 10.67.66.211 255.255.255.255 10.65.66.211
+ip route-static vpn-instance MBH_4G_S1 10.67.66.212 255.255.255.255 10.65.66.212
+ip route-static vpn-instance MBH_4G_S1 10.67.66.213 255.255.255.255 10.65.66.213
+ip route-static vpn-instance MBH_4G_S1 10.67.66.214 255.255.255.255 10.65.66.214
+ip route-static vpn-instance MBH_4G_S1 10.67.66.215 255.255.255.255 10.65.66.215
+ip route-static vpn-instance MBH_4G_S1 10.67.66.216 255.255.255.255 10.65.66.216
+ip route-static vpn-instance MBH_4G_S1 10.67.66.217 255.255.255.255 10.65.66.217
+ip route-static vpn-instance MBH_4G_S1 10.67.66.218 255.255.255.255 10.65.66.218
+ip route-static vpn-instance MBH_4G_S1 10.67.66.219 255.255.255.255 10.65.66.219
+ip route-static vpn-instance MBH_4G_S1 10.67.66.220 255.255.255.255 10.65.66.220
+ip route-static vpn-instance MBH_4G_S1 10.67.66.221 255.255.255.255 10.65.66.221
+ip route-static vpn-instance MBH_4G_S1 10.95.198.194 255.255.255.255 10.93.198.194 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.195 255.255.255.255 10.93.198.195 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.196 255.255.255.255 10.93.198.196 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.197 255.255.255.255 10.93.198.197 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.198 255.255.255.255 10.93.198.198 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.199 255.255.255.255 10.93.198.199 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.200 255.255.255.255 10.93.198.200 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.201 255.255.255.255 10.93.198.201 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.202 255.255.255.255 10.93.198.202 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.203 255.255.255.255 10.93.198.203 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.204 255.255.255.255 10.93.198.204 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.205 255.255.255.255 10.93.198.205 description MW_5G_S1
+ip route-static vpn-instance MBH_4G_S1 10.95.198.206 255.255.255.255 10.93.198.206 description MW_5G_S1
+ip route-static vpn-instance OM_3G 10.43.148.0 255.255.255.248 10.62.66.213
+ip route-static vpn-instance OM_3G 10.59.70.0 255.255.255.248 10.62.66.193
+ip route-static vpn-instance OM_3G 10.59.70.8 255.255.255.248 10.62.66.194
+ip route-static vpn-instance OM_3G 10.59.70.16 255.255.255.248 10.62.66.195
+ip route-static vpn-instance OM_3G 10.59.70.24 255.255.255.248 10.62.66.196
+ip route-static vpn-instance OM_3G 10.59.70.32 255.255.255.248 10.62.66.197
+ip route-static vpn-instance OM_3G 10.59.70.40 255.255.255.248 10.62.66.198
+ip route-static vpn-instance OM_3G 10.59.70.48 255.255.255.248 10.62.66.199
+ip route-static vpn-instance OM_3G 10.59.70.56 255.255.255.248 10.62.66.200
+ip route-static vpn-instance OM_3G 10.59.70.64 255.255.255.248 10.62.66.201
+ip route-static vpn-instance OM_3G 10.59.70.72 255.255.255.248 10.62.66.202
+ip route-static vpn-instance OM_3G 10.59.70.80 255.255.255.248 10.62.66.203
+ip route-static vpn-instance OM_3G 10.59.70.88 255.255.255.248 10.62.66.204
+ip route-static vpn-instance OM_3G 10.59.70.96 255.255.255.248 10.62.66.205
+ip route-static vpn-instance OM_3G 10.59.70.104 255.255.255.248 10.62.66.206
+ip route-static vpn-instance OM_3G 10.59.70.112 255.255.255.248 10.62.66.207
+ip route-static vpn-instance OM_3G 10.59.70.120 255.255.255.248 10.62.66.208
+ip route-static vpn-instance OM_3G 10.59.70.128 255.255.255.248 10.62.66.209
+ip route-static vpn-instance OM_3G 10.59.70.136 255.255.255.248 10.62.66.210
+ip route-static vpn-instance OM_3G 10.59.70.144 255.255.255.248 10.62.66.211
+ip route-static vpn-instance OM_3G 10.59.70.152 255.255.255.248 10.62.66.212
+ip route-static vpn-instance OM_3G 10.59.70.160 255.255.255.248 10.62.66.213
+ip route-static vpn-instance OM_3G 10.59.70.168 255.255.255.248 10.62.66.214
+ip route-static vpn-instance OM_3G 10.59.70.176 255.255.255.248 10.62.66.215
+ip route-static vpn-instance OM_3G 10.59.70.184 255.255.255.248 10.62.66.216
+ip route-static vpn-instance OM_3G 10.59.70.192 255.255.255.248 10.62.66.217
+ip route-static vpn-instance OM_3G 10.59.70.200 255.255.255.248 10.62.66.218
+ip route-static vpn-instance OM_3G 10.59.70.208 255.255.255.248 10.62.66.219
+ip route-static vpn-instance OM_3G 10.59.70.216 255.255.255.248 10.62.66.220
+ip route-static vpn-instance OM_3G 10.59.70.224 255.255.255.248 10.62.66.221
+#
+snmp-agent
+snmp-agent local-engineid 800007DB033400A3DF312F
+snmp-agent community read cipher %@%@IR&OK5FlV3fHFjLD#X[V"URK]I=y>9FZjX6O9M;@4B_XURN"0*kB;O3$Z;&0}`#RN3]BRW"U%@%@ mib-view iso-view
+snmp-agent community write cipher %@%@WcNx'muS}"H/#4M||))<"URN=INLAVu$B8<l(x:Ug%6FURQ",b"C$x5:4Ttd5<W&\K_~RZ"U%@%@ mib-view iso-view
+#
+snmp-agent sys-info version all
+snmp-agent community complexity-check disable
+snmp-agent target-host trap address udp-domain 172.19.198.71 params securityname cipher %@%@#TA]DB[v=YuH1g:zS'^N"URS%@%@ v2c private-netmanager
+snmp-agent target-host trap address udp-domain 172.19.198.216 params securityname cipher %@%@@)QrH+KUm@Coj\XiM}_~qRth%@%@ v2c private-netmanager
+snmp-agent target-host trap address udp-domain 10.8.196.193 params securityname cipher %@%@C{+X<zG(`Q}a<!4^_v$EU4h#%@%@ v2c private-netmanager
+#
+snmp-agent mib-view included iso-view iso.*
+#
+snmp-agent trap source LoopBack0
+#
+snmp-agent trap type base-trap
+#
+snmp-agent trap enable
+#
+lldp enable
+#
+lldp management-address 10.80.8.103
+#
+ssh server authentication-retries 5
+sftp server enable
+stelnet server enable
+snetconf server enable
+ssh authentication-type default password
+ssh server acl 2100
+#
+ssh client first-time enable
+ssh client 10.8.196.193 assign rsa-key 10.8.196.193
+ssh client 172.19.198.216 assign rsa-key 172.19.198.216
+#
+user-interface maximum-vty 15
+#
+user-interface con 0
+ authentication-mode aaa
+#
+user-interface vty 0 14
+ acl 2100 inbound
+ authentication-mode aaa
+ user privilege level 15
+ protocol inbound ssh
+#
+local-aaa-server
+#
+return
