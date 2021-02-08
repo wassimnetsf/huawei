@@ -102,7 +102,7 @@
 # -------------------------------------------------------------------------------
 !Software Version V800R005C01SPC200
 !Last configuration was updated at 2021-01-13 15:50:39+01:00 by ggineste
-!Last configuration was saved at 2021-02-07 02:00:27+01:00 by u2000
+!Last configuration was saved at 2021-02-08 01:00:20+01:00 by u2000
 #
 clock timezone SWITZERLAND add 01:00:00
 clock daylight-saving-time SWITZERLAND repeating 02:00 last Sun Mar 02:00 last Sun Oct 01:00 
