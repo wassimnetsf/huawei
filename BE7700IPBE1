@@ -1,24 +1,3 @@
-# Huawei Versatile Routing Platform Software
-# VRP (R) software, Version 8.180 (ATN 910C-F V300R005C00SPC200)
-# Copyright (C) 2012-2018 Huawei Technologies Co., Ltd.
-# Patch Version: V300R005SPH002
-# 
-# ATN 910C-F version information:
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-# CXP version information:
-# 
-#   StartupTime   2020/03/13   14:35:35
-#   SDRAM Memory Size   : 4096M bytes
-#   FLASH Memory Size   : 64M bytes
-#   CFCARD Memory Size  : 1640M bytes
-#   ANGMHSTF0110 version information
-#   PCB         Version : ANG1CXPJ REV C
-#   EPLD        Version : V120
-#   FPGA1       Version : V110
-#   PE          Version : 000
-#   BootROM     Version : 08.60
-#   BootLoad    Version : 08.60
-#   Software    Version : Version 8.180 RELEASE 0001
 # ATN 910C-F's Device status:
 # -------------------------------------------------------------------------------
 # Slot #   Type    Online     Register     Status     Role   LsId   Primary      
