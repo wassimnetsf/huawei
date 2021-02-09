@@ -1,23 +1,3 @@
-# Huawei Versatile Routing Platform Software
-# VRP (R) software, Version 5.170 (ATN 910I DC V200R006C20SPC600)
-# Copyright (C) 2015-2018 Huawei Technologies Co., Ltd.
-# ATN 910I DC version information:
-# 
-# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-# CXP version information:
-# 
-#          StartupTime   2018/08/06   22:06:03 
-#   SDRAM Memory Size   : 512M bytes
-#   FLASH Memory Size   : 128M bytes
-#   CFCARD Memory Size : 111M bytes 
-#   CXP version information
-#   PCB         Version : 910I DC REV B
-#   FPGA1       Version : V220
-#   CPLD1       Version : V130
-#   PE          Version : 000
-#   BootROM     Version : 8.40.05
-#   BootLoad    Version : 9.72.05
-#   Software    Version : Version 5.170 RELEASE 0001
 # ATN 910I DC's Device status:
 # Slot #    Type       Online    Register      Status      Primary    
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
